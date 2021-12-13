@@ -1,0 +1,28 @@
+*** Settings ***
+Documentation   A test case for sorting a logged-in user's inventory page from the highest to the lowest price
+...
+...             sdfasdf
+...             asdfasdfasdfasf
+Library         SeleniumLibrary
+
+*** Test Cases ***
+
+Valid Login
+
+    Open Browser    https://www.saucedemo.com/      chrome   
+
+    Maximize Browser Window
+
+    Page Should Contain Element     login-button
+
+    Input Text      user-name       standard_user
+
+    Input Password      password    secret_sauce
+
+    Click Button    login-button
+
+    Select From List By Value    xpath=//select[@class="product_sort_container"]     hilo
+
+    List Selection Should Be     xpath=//select[@class="product_sort_container"]     Price (high to low)
+
+    [Teardown]  Close Browser
